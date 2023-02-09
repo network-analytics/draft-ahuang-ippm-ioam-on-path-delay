@@ -12,14 +12,14 @@ Expires: 13 August 2023                                        B. Claise
                                                          9 February 2023
 
 
-  On-path delay data field for In Situ Operations, Administration, and
+  On-Path delay Data-field for In Situ Operations, Administration, and
                            Maintenance (IOAM)
                    draft-ahuang-ioam-on-path-delay-00
 
 Abstract
 
-   This document defines new Data Fields to allow the export of the on-
-   path delay using In Situ Operations, Administration, and Maintenance
+   This document defines a Data-Field to allow the export of on-path
+   delay using In Situ Operations, Administration, and Maintenance
    (IOAM).
 
 Requirements Language
@@ -55,7 +55,7 @@ Status of This Memo
 
 Huang Feng, et al.       Expires 13 August 2023                 [Page 1]
 
-Internet-Draft           On-path delay for IOAM            February 2023
+Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 Copyright Notice
@@ -77,13 +77,12 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Solution overview . . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  On-Path delay Data-field  . . . . . . . . . . . . . . . .   4
-   3.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
-   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
-     7.2.  Informative References  . . . . . . . . . . . . . . . . .   5
+   3.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
+   4.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   4
+   5.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
+   6.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   4
+     6.1.  Normative References  . . . . . . . . . . . . . . . . . .   4
+     6.2.  Informative References  . . . . . . . . . . . . . . . . .   5
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
@@ -93,14 +92,15 @@ Table of Contents
    and applications.  The On-Path delay can be computed using IOAM
    [RFC9197] with both Passport-mode and Postcard-mode.  In both cases,
    a time reference is needed.  In Passport-mode, a timestamp can be
-   added into the data-field and in Postcard-mode, IOAM Direct Export
-   [RFC9326] can be used with [I-D.ahuang-ippm-dex-timestamp-ext] to add
-   a timestamp into the header.
+   added into the IOAM Trace-type Data-Field and in Postcard-mode, IOAM
+   Direct Export [RFC9326] can be used with
+   [I-D.ahuang-ippm-dex-timestamp-ext] to add a timestamp into the
+   header.
 
-   To allow the export of the On-Path delay, new data fields are
-   necessary in the IOAM environment.  This document defines a new field
-   in the IOAM architecture to support the export of the delay across
-   the IOAM domain.
+   To allow the export of the On-Path delay, a new data field is
+   necessary in the IOAM environment.  This document defines the new
+   field in the IOAM architecture to support the export of the delay
+   across the IOAM domain.
 
 
 
@@ -111,7 +111,7 @@ Table of Contents
 
 Huang Feng, et al.       Expires 13 August 2023                 [Page 2]
 
-Internet-Draft           On-path delay for IOAM            February 2023
+Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 2.  Solution overview
@@ -167,15 +167,15 @@ Internet-Draft           On-path delay for IOAM            February 2023
 
 Huang Feng, et al.       Expires 13 August 2023                 [Page 3]
 
-Internet-Draft           On-path delay for IOAM            February 2023
+Internet-Draft           On-Path delay for IOAM            February 2023
 
 
        Figure 1: On-path delay use case.  Packets flow from host 1 to
                                   host 2.
 
-   This document proposes a new 32-bit field allowing the export of the
-   On-Path delay using IOAM.  The new Data-field is allocated by IANA,
-   as defined in Section 5.
+   This document proposes a 32-bit field allowing the export of the On-
+   Path delay using IOAM.  The Data-Field is allocated by IANA, as
+   defined in Section 4.
 
 2.1.  On-Path delay Data-field
 
@@ -192,19 +192,13 @@ Internet-Draft           On-path delay for IOAM            February 2023
 
                  Figure 2: On-Path delay Data-field Format
 
-3.  Use Cases
-
-   Possible interesting On-Path delay measurement use cases in
-   combination with other key metrics is described in Section 5 of
-   [I-D.ietf-opsawg-ipfix-on-path-telemetry].
-
-4.  Security Considerations
+3.  Security Considerations
 
    The security considerations for the IOAM Trace-Type and IOAM DEX
    Option-type are defined in [RFC9197] and in [RFC9326].  This document
    adds no additional security considerations.
 
-5.  IANA Considerations
+4.  IANA Considerations
 
    This document requests IANA to add the following bit in the "IOAM
    Trace-Type" Registry.
@@ -214,21 +208,23 @@ Internet-Draft           On-path delay for IOAM            February 2023
                decapsulating node measured in milliseconds.
   Reference: this document
 
-6.  Acknowledgements
+5.  Acknowledgements
 
    The authors would like to thank xxx for their review and valuable
    comments.
+
+6.  References
+
+6.1.  Normative References
+
+
 
 
 
 Huang Feng, et al.       Expires 13 August 2023                 [Page 4]
 
-Internet-Draft           On-path delay for IOAM            February 2023
+Internet-Draft           On-Path delay for IOAM            February 2023
 
-
-7.  References
-
-7.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -250,7 +246,7 @@ Internet-Draft           On-path delay for IOAM            February 2023
               DOI 10.17487/RFC9326, November 2022,
               <https://www.rfc-editor.org/info/rfc9326>.
 
-7.2.  Informative References
+6.2.  Informative References
 
    [I-D.ahuang-ippm-dex-timestamp-ext]
               Huang Feng, A., Francois, P., Claise, B., and T. Graf,
@@ -274,18 +270,17 @@ Internet-Draft           On-path delay for IOAM            February 2023
               <https://www.ietf.org/archive/id/draft-spiegel-ippm-ioam-
               rawexport-06.txt>.
 
+   [RFC8911]  Bagnulo, M., Claise, B., Eardley, P., Morton, A., and A.
+              Akhter, "Registry for Performance Metrics", RFC 8911,
+              DOI 10.17487/RFC8911, November 2021,
+              <https://www.rfc-editor.org/info/rfc8911>.
 
 
 
 Huang Feng, et al.       Expires 13 August 2023                 [Page 5]
 
-Internet-Draft           On-path delay for IOAM            February 2023
+Internet-Draft           On-Path delay for IOAM            February 2023
 
-
-   [RFC8911]  Bagnulo, M., Claise, B., Eardley, P., Morton, A., and A.
-              Akhter, "Registry for Performance Metrics", RFC 8911,
-              DOI 10.17487/RFC8911, November 2021,
-              <https://www.rfc-editor.org/info/rfc8911>.
 
 Authors' Addresses
 
@@ -314,6 +309,11 @@ Authors' Addresses
    CH-8045 Zurich
    Switzerland
    Email: thomas.graf@swisscom.com
+
+
+
+
+
 
 
 

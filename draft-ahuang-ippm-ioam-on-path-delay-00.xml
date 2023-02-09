@@ -13,7 +13,7 @@
 <rfc category="std" docName="draft-ahuang-ioam-on-path-delay-00"
      ipr="trust200902">
   <front>
-    <title abbrev="On-path delay for IOAM">On-path delay data field for In
+    <title abbrev="On-Path delay for IOAM">On-Path delay Data-field for In
     Situ Operations, Administration, and Maintenance (IOAM)</title>
 
     <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">
@@ -97,8 +97,8 @@
     <date day="09" month="February" year="2023"/>
 
     <abstract>
-      <t>This document defines new Data Fields to allow the export
-      of the on-path delay using In Situ Operations, Administration, and
+      <t>This document defines a Data-Field to allow the export
+      of on-path delay using In Situ Operations, Administration, and
       Maintenance (IOAM).</t>
     </abstract>
 
@@ -118,13 +118,13 @@
       applications. The On-Path delay can be computed using IOAM
       <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.
       In both cases, a time reference is needed. In Passport-mode, a timestamp
-      can be added into the data-field and in Postcard-mode, IOAM Direct Export
-      <xref target="RFC9326"/> can be used with
+      can be added into the IOAM Trace-type Data-Field and in Postcard-mode,
+      IOAM Direct Export <xref target="RFC9326"/> can be used with
       <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> to add a timestamp into
       the header.</t>
 
-      <t>To allow the export of the On-Path delay, new data fields are necessary
-      in the IOAM environment. This document defines a new field in the IOAM
+      <t>To allow the export of the On-Path delay, a new data field is necessary
+      in the IOAM environment. This document defines the new field in the IOAM
       architecture to support the export of the delay across the IOAM domain.</t>
     </section>
 
@@ -179,11 +179,11 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 ]]></artwork>
       </figure>
       
-      <t>This document proposes a new 
-      32-bit field allowing the export of the On-Path delay using IOAM.
+      <t>This document proposes a 32-bit field allowing the export of
+      the On-Path delay using IOAM.
        <!-- referencing the performance metric defined in 
       <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/> Section 3. -->
-      The new Data-field is allocated by IANA, as defined in 
+      The Data-Field is allocated by IANA, as defined in 
       <xref target="IANA_Considerations"/>.</t>
 
       <section anchor="on_path_delay_datafield" title="On-Path delay Data-field">
@@ -205,11 +205,11 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 
     </section>
 
-    <section anchor="usecases" title="Use Cases">
+    <!-- <section anchor="usecases" title="Use Cases">
       <t>Possible interesting On-Path delay measurement use cases in
       combination with other key metrics is described in Section 5 of <xref
       target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>.</t>
-    </section>
+    </section> -->
 
     <section anchor="security" title="Security Considerations">
       <t>The security considerations for the IOAM Trace-Type and IOAM DEX Option-type
