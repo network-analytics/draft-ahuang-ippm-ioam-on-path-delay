@@ -120,8 +120,7 @@
       In both cases, a time reference is needed. In Passport-mode, a timestamp
       can be added into the data-field and in Postcard-mode, IOAM Direct Export
       <xref target="RFC9326"/> can be used with
-      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/>
-       to add a timestamp into
+      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> to add a timestamp into
       the header.</t>
 
       <t>To allow the export of the On-Path delay, new data fields are necessary
@@ -143,11 +142,12 @@
       to aggregate the On-path delay in the IPFIX exporter on the transit and
       decapsulation node.</t>
 
-      <t>The On-path delay has been defined in <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>
-      using performance metrics <xref target="RFC8911"/>. The delay is computed between
-      the encapsulated node in the IOAM domain and the transit or decapsulating node as shown in
-      <xref target="topology"/>. The computed delays in <xref target="topology"/> are computed as
-      following:</t>
+      <t>The On-path delay has been defined in 
+      <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/> using performance
+      metrics <xref target="RFC8911"/>. The delay is computed between the
+      encapsulated node in the IOAM domain and the transit or decapsulating 
+      node as shown in <xref target="topology"/>. The computed delays in
+      <xref target="topology"/> are computed as following:</t>
       <t><list style="symbols">
           <t>D1: delay between the Encapsulation node R1 and the Transit node R2.</t>
           <t>D2: delay between the Encapsulation node R1 and the Transit node R3.</t>
@@ -224,7 +224,8 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
       <t><figure>
           <artwork align="left"><![CDATA[
   Bit: 12
-  Description: On-path delay between the encapsulated node and the transit or decapsulating node.
+  Description: On-path delay between the encapsulated node and the transit or 
+               decapsulating node measured in milliseconds.
   Reference: this document]]></artwork>
         </figure></t>
 

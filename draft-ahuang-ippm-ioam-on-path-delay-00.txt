@@ -210,14 +210,14 @@ Internet-Draft           On-path delay for IOAM            February 2023
    Trace-Type" Registry.
 
   Bit: 12
-  Description: On-path delay between the encapsulated node and the transit or decapsulating node.
+  Description: On-path delay between the encapsulated node and the transit or
+               decapsulating node measured in milliseconds.
   Reference: this document
 
 6.  Acknowledgements
 
    The authors would like to thank xxx for their review and valuable
    comments.
-
 
 
 
