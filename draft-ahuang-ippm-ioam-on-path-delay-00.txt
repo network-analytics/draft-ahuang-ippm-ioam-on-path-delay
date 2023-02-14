@@ -5,11 +5,11 @@
 Network Working Group                                      A. Huang Feng
 Internet-Draft                                               P. Francois
 Intended status: Standards Track                               INSA-Lyon
-Expires: 13 August 2023                                        B. Claise
+Expires: 18 August 2023                                        B. Claise
                                                                   Huawei
                                                                  T. Graf
                                                                 Swisscom
-                                                         9 February 2023
+                                                        14 February 2023
 
 
   On-Path delay Data-field for In Situ Operations, Administration, and
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 August 2023.
+   This Internet-Draft will expire on 18 August 2023.
 
 
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Huang Feng, et al.       Expires 13 August 2023                 [Page 1]
+Huang Feng, et al.       Expires 18 August 2023                 [Page 1]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -78,15 +78,14 @@ Table of Contents
    2.  Solution overview . . . . . . . . . . . . . . . . . . . . . .   3
      2.1.  Using IOAM Trace-Option . . . . . . . . . . . . . . . . .   4
      2.2.  Using IOAM DEX Option . . . . . . . . . . . . . . . . . .   4
-   3.  Solution overview RM  . . . . . . . . . . . . . . . . . . . .   4
-     3.1.  On-Path delay Data-field  . . . . . . . . . . . . . . . .   5
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
-   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
-   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   6
-   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
+   3.  On-Path delay Data-field  . . . . . . . . . . . . . . . . . .   5
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+   6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   5
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
      7.2.  Informative References  . . . . . . . . . . . . . . . . .   6
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   7
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
 
@@ -109,15 +108,16 @@ Table of Contents
 
 
 
-Huang Feng, et al.       Expires 13 August 2023                 [Page 2]
+
+Huang Feng, et al.       Expires 18 August 2023                 [Page 2]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 2.  Solution overview
 
-   The on-path delay is computed between the encapsulating node in the
-   IOAM domain and the transit or decapsulating node as shown in
+   The on-path delay is computed between the encapsulation node in the
+   IOAM domain and the transit or decapsulation node as shown in
    Figure 1.  The calculated delays in Figure 1 are computed as
    following:
 
@@ -165,7 +165,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-Huang Feng, et al.       Expires 13 August 2023                 [Page 3]
+Huang Feng, et al.       Expires 18 August 2023                 [Page 3]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -184,9 +184,12 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    To compute the delay at the transit and decapsulation node, a
    timestamp reference from the encapsulation node needs to be added.
    Bit 2 (timestamp seconds) and Bit 3 (timestamp fraction) from the
-   IOAM Trace-type field can be used for this purpose.  At each node,
+   IOAM Trace-type field can be used for this purpose and at each node,
    the on-path delay can be computed using the delay from the
    encapsulation node and the current node.
+
+   To export the on-path delay, a new bit in the IOAM Trace-Type Bit-
+   field is needed.  Section 3 defines the Data-Field.
 
    To export the on-path delay metrics,
    [I-D.spiegel-ippm-ioam-rawexport] can be used to collect raw IOAM
@@ -194,93 +197,51 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 2.2.  Using IOAM DEX Option
 
-   TBD
+   In Postcard-mode, telemetry data is exported at the transit nodes and
+   decapsulation node of the IOAM domain.  The telemetry data can be
+   aggregated at each node before being exported to a collector.
 
-3.  Solution overview RM
+   DEX Option-type, as defined in [RFC9326], is used for this purpose.
+   The exported telemetry data is defined in IOAM Trace-Type Bit-field
+   and to support the export of the on-path delay, the new field defined
+   in Section 3 is used.
 
-   The IOAM Trace-Type Data-fields are defined in Section 4.4.2
-   [RFC9197].  These Data-fields allow exporting telemetry data in both
-   IOAM Trace-Type Option [RFC9197] and IOAM DEX Option [RFC9326].  In
-   IOAM Trace-Type option, the delay can be added at each transit node
-   and decapsulation node using the Pre-allocated and Incremental Trace-
-   Option header and can be exported using
-   [I-D.spiegel-ippm-ioam-rawexport].  In IOAM DEX Option [RFC9326],
-   using a Postcard-mode approach, the delay can be exported to a
-   collector using IPFIX [I-D.ietf-opsawg-ipfix-on-path-telemetry]
-   allowing to aggregate the On-path delay in the IPFIX exporter on the
-   transit and decapsulation node.
+   The timestamp reference needs to be added to the IOAM DEX Option-type
+   header.  [I-D.ahuang-ippm-dex-timestamp-ext] defines an extension to
+   allow adding the timestamp in the encapsulation node.  Bit 2
+   (timestamp seconds) and Bit 3 (timestamp fraction) from the IOAM DEX
+   Extension-Flags, defined in [I-D.ahuang-ippm-dex-timestamp-ext], are
+   used to add this time reference.  At each transit and decapsulation
+   node, the difference between the timestamp in the header and the
+   current timestamp is computed.
 
-   The On-path delay has been defined in
-   [I-D.ietf-opsawg-ipfix-on-path-telemetry] using performance metrics
-   [RFC8911].  The delay is computed between the encapsulating node in
-   the IOAM domain and the transit or decapsulating node as shown in
-   Figure 1.  The computed delays in Figure 1 are computed as following:
-
-   *  D1: delay between the Encapsulation node R1 and the Transit node
-      R2.
+   To export the aggregated on-path delay metrics, IPFIX can used with
+   [I-D.ietf-opsawg-ipfix-on-path-telemetry].  This allows aggregation
+   before the export.
 
 
 
-Huang Feng, et al.       Expires 13 August 2023                 [Page 4]
+Huang Feng, et al.       Expires 18 August 2023                 [Page 4]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
 
-   *  D2: delay between the Encapsulation node R1 and the Transit node
-      R3.
-
-   *  D3: delay between the Encapsulation node R1 and the Decapsulation
-      node R4.
-
-                                 IOAM Domain
-                 .........................................
-                 .                                       .
-                 .    D1                                 .
-                 . <------>                              .
-                 .                                       .
-                 .          D2                           .
-                 . <-------------------->                .
-                 .                                       .
-                 .                  D3                   .
-                 . <-----------------------------------> .
-                 .                                       .
-   (H1) ------ (R1) ------- (R2) ------- (R3) -------- (R4) ------ (H2)
-   Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
-               Node         Node 1       Node 2        Node
-                 .                                       .
-                 .                                       .
-                 .........................................
-
-       Figure 2: On-path delay use case.  Packets flow from host 1 to
-                                  host 2.
-
-   This document proposes a 32-bit field allowing the export of the On-
-   Path delay using IOAM.  The Data-Field is allocated by IANA, as
-   defined in Section 5.
-
-3.1.  On-Path delay Data-field
+3.  On-Path delay Data-field
 
    The "On-Path Delay" field is a 4-octet unsigned integer field.  This
    field indicates the on-path delay between the encapsulation node and
    the transit or decapsulation node mesured in microseconds.
 
-    TBD
-      0                   1                   2                   3
-      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-      |                        On-Path Delay                          |
-      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     TBD
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+     |                        On-Path Delay                          |
+     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-                 Figure 3: On-Path delay Data-field Format
+                 Figure 2: On-Path delay Data-field Format
 
-
-
-
-
-Huang Feng, et al.       Expires 13 August 2023                 [Page 5]
-
-Internet-Draft           On-Path delay for IOAM            February 2023
-
+   The Data-Field is allocated by IANA, as defined in Section 5.
 
 4.  Security Considerations
 
@@ -293,10 +254,10 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    This document requests IANA to add the following bit in the "IOAM
    Trace-Type" Registry.
 
-  Bit: 12
-  Description: On-path delay between the encapsulated node and the transit or
-               decapsulating node measured in milliseconds.
-  Reference: this document
+    Bit: 12
+    Description: On-path delay between the encapsulated node and the
+                 transit or decapsulation node measured in microseconds.
+    Reference: this document
 
 6.  Acknowledgements
 
@@ -311,6 +272,15 @@ Internet-Draft           On-Path delay for IOAM            February 2023
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+
+
+
+
+Huang Feng, et al.       Expires 18 August 2023                 [Page 5]
+
+Internet-Draft           On-Path delay for IOAM            February 2023
+
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -328,15 +298,6 @@ Internet-Draft           On-Path delay for IOAM            February 2023
               <https://www.rfc-editor.org/info/rfc9326>.
 
 7.2.  Informative References
-
-
-
-
-
-Huang Feng, et al.       Expires 13 August 2023                 [Page 6]
-
-Internet-Draft           On-Path delay for IOAM            February 2023
-
 
    [I-D.ahuang-ippm-dex-timestamp-ext]
               Huang Feng, A., Francois, P., Claise, B., and T. Graf,
@@ -360,11 +321,6 @@ Internet-Draft           On-Path delay for IOAM            February 2023
               <https://www.ietf.org/archive/id/draft-spiegel-ippm-ioam-
               rawexport-06.txt>.
 
-   [RFC8911]  Bagnulo, M., Claise, B., Eardley, P., Morton, A., and A.
-              Akhter, "Registry for Performance Metrics", RFC 8911,
-              DOI 10.17487/RFC8911, November 2021,
-              <https://www.rfc-editor.org/info/rfc8911>.
-
 Authors' Addresses
 
    Alex Huang Feng
@@ -372,6 +328,14 @@ Authors' Addresses
    Lyon
    France
    Email: alex.huang-feng@insa-lyon.fr
+
+
+
+
+
+Huang Feng, et al.       Expires 18 August 2023                 [Page 6]
+
+Internet-Draft           On-Path delay for IOAM            February 2023
 
 
    Pierre Francois
@@ -384,14 +348,6 @@ Authors' Addresses
    Benoit Claise
    Huawei
    Email: benoit.claise@huawei.com
-
-
-
-
-
-Huang Feng, et al.       Expires 13 August 2023                 [Page 7]
-
-Internet-Draft           On-Path delay for IOAM            February 2023
 
 
    Thomas Graf
@@ -433,16 +389,4 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-Huang Feng, et al.       Expires 13 August 2023                 [Page 8]
+Huang Feng, et al.       Expires 18 August 2023                 [Page 7]
