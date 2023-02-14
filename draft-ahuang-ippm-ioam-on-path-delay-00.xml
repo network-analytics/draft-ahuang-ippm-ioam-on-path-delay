@@ -301,13 +301,6 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.9197.xml"?>
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.9326.xml"?>
-    </references>
-
-    <references title="Informative References">
-      <!-- <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8911.xml"?> -->
-
-      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.spiegel-ippm-ioam-rawexport.xml"?>
-      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-opsawg-ipfix-on-path-telemetry.xml"?>
 
       <!-- <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ahuang-ippm-dex-timestamp-ext.xml"?> -->
 
@@ -337,6 +330,14 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
         <seriesInfo name="Internet-Draft"
                     value="draft-ahuang-ippm-dex-timestamp-ext-00"/>
       </reference>
+    </references>
+
+    <references title="Informative References">
+      <!-- <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8911.xml"?> -->
+
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.spiegel-ippm-ioam-rawexport.xml"?>
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-opsawg-ipfix-on-path-telemetry.xml"?>
+
     </references>
   </back>
 </rfc>

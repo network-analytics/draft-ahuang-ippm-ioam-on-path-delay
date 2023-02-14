@@ -268,12 +268,12 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 7.1.  Normative References
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
-
-
+   [I-D.ahuang-ippm-dex-timestamp-ext]
+              Huang Feng, A., Francois, P., Claise, B., and T. Graf,
+              "Timestamp extension IOAM DEX", Work in Progress,
+              Internet-Draft, draft-ahuang-ippm-dex-timestamp-ext-00,
+              February 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ahuang-ippm-dex-timestamp-ext-00>.
 
 
 
@@ -281,6 +281,11 @@ Huang Feng, et al.       Expires 18 August 2023                 [Page 5]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -298,13 +303,6 @@ Internet-Draft           On-Path delay for IOAM            February 2023
               <https://www.rfc-editor.org/info/rfc9326>.
 
 7.2.  Informative References
-
-   [I-D.ahuang-ippm-dex-timestamp-ext]
-              Huang Feng, A., Francois, P., Claise, B., and T. Graf,
-              "Timestamp extension IOAM DEX", Work in Progress,
-              Internet-Draft, draft-ahuang-ippm-dex-timestamp-ext-00,
-              February 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ahuang-ippm-dex-timestamp-ext-00>.
 
    [I-D.ietf-opsawg-ipfix-on-path-telemetry]
               Graf, T., Claise, B., and A. H. Feng, "Export of On-Path
@@ -328,6 +326,8 @@ Authors' Addresses
    Lyon
    France
    Email: alex.huang-feng@insa-lyon.fr
+
+
 
 
 
