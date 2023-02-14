@@ -123,9 +123,9 @@
       </t>
          
       <t>In Passport-mode, the reference timestamp is obtained from IOAM
-      Trace-type Data-Field. In Postcard-mode, using IOAM Direct Export
-      <xref target="RFC9326"/>, <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/>
-      can be used to add a timestamp into the header.
+      Trace-type Data-Field. In Postcard-mode,
+      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> can be used to
+      add a timestamp into the header.
       </t>           
       <!--On-Path delay can be computed using IOAM
       <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.-->
@@ -141,7 +141,7 @@
       <!-- The On-path delay has been defined in 
       <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/> TODO: using
       performance metrics <xref target="RFC8911"/>. -->
-      The on-path delay is computed between the encapsulation node in the
+      The on-path delay is computed between the encapsulation node of the
       IOAM domain and the transit or decapsulation node as shown in
       <xref target="topology"/>. The calculated delays in
       <xref target="topology"/> are computed as following:</t>
@@ -187,7 +187,7 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 
       <t>In <xref target="trace-option"/> we describe how the delay can be computed 
       using the existing Trace-Type Data-Fields and in <xref target="dex-option"/> we
-      describe how the delay can be exported with a timestamp extension.</t>
+      describe how the delay can be calculated using a timestamp extension.</t>
 
       <section anchor="trace-option" title="Using IOAM Trace-Option">
         <t>In Passport-mode, telemetry data is added to the data-plane packet at each
@@ -218,9 +218,9 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
         exported to a collector.</t>
 
         <t>DEX Option-type, as defined in <xref target="RFC9326"/>, is used for this purpose.
-        The exported telemetry data is defined in IOAM Trace-Type Bit-field and to support 
-        the export of the on-path delay, the new field defined in 
-        <xref target="on_path_delay_datafield"/> is used.</t>
+        The exported telemetry data is defined in IOAM Trace-Type Bit-field. The export of the
+        on-path delay is based on the On-Path Delay field defined in 
+        <xref target="on_path_delay_datafield"/>.</t>
 
         <t>The timestamp reference needs to be added to the IOAM DEX Option-type header.
         <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> defines an extension to allow adding

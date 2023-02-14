@@ -98,9 +98,9 @@ Table of Contents
    data fields.
 
    In Passport-mode, the reference timestamp is obtained from IOAM
-   Trace-type Data-Field.  In Postcard-mode, using IOAM Direct Export
-   [RFC9326], [I-D.ahuang-ippm-dex-timestamp-ext] can be used to add a
-   timestamp into the header.
+   Trace-type Data-Field.  In Postcard-mode,
+   [I-D.ahuang-ippm-dex-timestamp-ext] can be used to add a timestamp
+   into the header.
 
    This document introduces a data field in the IOAM architecture to
    export delay information.  It uses a bit in the IOAM Trace-type field
@@ -116,7 +116,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 2.  Solution overview
 
-   The on-path delay is computed between the encapsulation node in the
+   The on-path delay is computed between the encapsulation node of the
    IOAM domain and the transit or decapsulation node as shown in
    Figure 1.  The calculated delays in Figure 1 are computed as
    following:
@@ -159,7 +159,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
    In Section 2.1 we describe how the delay can be computed using the
    existing Trace-Type Data-Fields and in Section 2.2 we describe how
-   the delay can be exported with a timestamp extension.
+   the delay can be calculated using a timestamp extension.
 
 
 
@@ -202,9 +202,9 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    aggregated at each node before being exported to a collector.
 
    DEX Option-type, as defined in [RFC9326], is used for this purpose.
-   The exported telemetry data is defined in IOAM Trace-Type Bit-field
-   and to support the export of the on-path delay, the new field defined
-   in Section 3 is used.
+   The exported telemetry data is defined in IOAM Trace-Type Bit-field.
+   The export of the on-path delay is based on the On-Path Delay field
+   defined in Section 3.
 
    The timestamp reference needs to be added to the IOAM DEX Option-type
    header.  [I-D.ahuang-ippm-dex-timestamp-ext] defines an extension to
