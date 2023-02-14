@@ -152,7 +152,7 @@
       <t>The On-path delay has been defined in 
       <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/> using performance
       metrics <xref target="RFC8911"/>. The delay is computed between the
-      encapsulated node in the IOAM domain and the transit or decapsulating 
+      encapsulating node in the IOAM domain and the transit or decapsulating 
       node as shown in <xref target="topology"/>. The computed delays in
       <xref target="topology"/> are computed as following:</t>
       <t><list style="symbols">
