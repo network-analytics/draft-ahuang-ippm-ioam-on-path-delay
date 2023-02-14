@@ -98,14 +98,14 @@ Table of Contents
    data fields.
 
    In Passport-mode, the reference timestamp is obtained from IOAM
-   Trace-type Data-Field.  In IOAM Direct Export [RFC9326],
-   [I-D.ahuang-ippm-dex-timestamp-ext] can be used to add a timestamp
-   into the header.
+   Trace-type Data-Field.  In Postcard-mode, using IOAM Direct Export
+   [RFC9326], [I-D.ahuang-ippm-dex-timestamp-ext] can be used to add a
+   timestamp into the header.
 
    This document introduces a data field in the IOAM architecture to
-   export delay information.
-
-
+   export delay information.  It uses a bit in the IOAM Trace-type field
+   to request exporting nodes to include delay measurement in the
+   exported data.
 
 
 

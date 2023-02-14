@@ -122,19 +122,17 @@
       IOAM data fields.
       </t>
          
-      <t>In Passport-mode, the reference timestamp
-      is obtained from IOAM Trace-type Data-Field. In IOAM Direct Export
-      <xref target="RFC9326"/>, 
-      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> can be used to add
-      a timestamp into the header.       
+      <t>In Passport-mode, the reference timestamp is obtained from IOAM
+      Trace-type Data-Field. In Postcard-mode, using IOAM Direct Export
+      <xref target="RFC9326"/>, <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/>
+      can be used to add a timestamp into the header.
       </t>           
       <!--On-Path delay can be computed using IOAM
       <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.-->
 
       <t>This document introduces a data field in the IOAM architecture to
-      export delay information.
-      <!-- , and uses a bit in the IOAM, trace-type registry to trigger the 
-      export behaviour. -->
+      export delay information. It uses a bit in the IOAM Trace-type field
+      to request exporting nodes to include delay measurement in the exported data.
       </t>
     </section>
 
