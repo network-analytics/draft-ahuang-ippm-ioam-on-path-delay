@@ -98,7 +98,7 @@
 
     <abstract>
       <t>This document defines a Data-Field to allow the export
-      of on-path delay using In Situ Operations, Administration, and
+      of on-path delay information using In Situ Operations, Administration, and
       Maintenance (IOAM).</t>
     </abstract>
 
@@ -115,17 +115,24 @@
     <section anchor="introduction" title="Introduction">
       <t>Network operators need to mesure the On-Path delay accross their
       network to monitor the proper functionning of their infrastructure and
-      applications. The On-Path delay can be computed using IOAM
-      <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.
-      In both cases, a time reference is needed. In Passport-mode, a timestamp
-      can be added into the IOAM Trace-type Data-Field and in Postcard-mode,
-      IOAM Direct Export <xref target="RFC9326"/> can be used with
-      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> to add a timestamp into
-      the header.</t>
+      applications.</t> 
+         
+      <t>In this draft, we propose to export delay measurement results 
+           based on the timestamp seconds and timestamp fractions fields of the
+           IOAM data fields.
+      </t>
+         
+     <t>In Passport-mode, the reference timestamp
+      is obtained from IOAM Trace-type Data-Field. In IOAM Direct Export <xref target="RFC9326"/>, 
+      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> can be used to add a timestamp into
+      the header.       
+         </t>           
+      <!--On-Path delay can be computed using IOAM
+      <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.-->
 
-      <t>To allow the export of the On-Path delay, a new data field is necessary
-      in the IOAM environment. This document defines the new field in the IOAM
-      architecture to support the export of the delay across the IOAM domain.</t>
+      <t>This document introduces a data field in the IOAM
+      architecture to export delay infomration, and uses a bit in the IOAM, trace-type registry to trigger
+         the export behaviour.</t>
     </section>
 
     <section anchor="solution_overview" title="Solution overview">
