@@ -80,7 +80,7 @@ Table of Contents
      2.2.  Using IOAM DEX Option . . . . . . . . . . . . . . . . . .   4
    3.  Solution overview RM  . . . . . . . . . . . . . . . . . . . .   4
      3.1.  On-Path delay Data-field  . . . . . . . . . . . . . . . .   5
-   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   4.  Security Considerations . . . . . . . . . . . . . . . . . . .   6
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    6.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   6
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
@@ -104,8 +104,8 @@ Table of Contents
    into the header.
 
    This document introduces a data field in the IOAM architecture to
-   export delay information, and uses a bit in the IOAM, trace-type
-   registry to trigger the export behaviour.
+   export delay information.
+
 
 
 
@@ -116,11 +116,9 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 2.  Solution overview
 
-   The On-path delay has been defined in
-   [I-D.ietf-opsawg-ipfix-on-path-telemetry] TODO: using performance
-   metrics [RFC8911].  The delay is computed between the encapsulating
-   node in the IOAM domain and the transit or decapsulating node as
-   shown in Figure 1.  The calculated delays in Figure 1 are computed as
+   The on-path delay is computed between the encapsulating node in the
+   IOAM domain and the transit or decapsulating node as shown in
+   Figure 1.  The calculated delays in Figure 1 are computed as
    following:
 
    *  D1: delay between the Encapsulation node R1 and the Transit node
@@ -154,7 +152,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
        Figure 1: On-path delay use case.  Packets flow from host 1 to
                                   host 2.
 
-   In the IOAM, this delay can be exported in Passport-mode using Pre-
+   In IOAM, this delay can be exported in Passport-mode using Pre-
    allocated Trace-Option and Incremental Trace-Option as defined in
    [RFC9197] or in Postcard-mode using IOAM DEX Option as defined in
    [RFC9326].
@@ -162,6 +160,8 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    In Section 2.1 we describe how the delay can be computed using the
    existing Trace-Type Data-Fields and in Section 2.2 we describe how
    the delay can be exported with a timestamp extension.
+
+
 
 
 
@@ -174,16 +174,23 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
    In Passport-mode, telemetry data is added to the data-plane packet at
    each node of the IOAM-domain and all collected metrics are exported
-   in the decapsulation node.
+   by the decapsulation node.
 
-   In IOAM, Pre-allocated Trace Option-type and Incremental Trace
-   Option-type is used to transport the different metrics.
+   Pre-allocated Trace Option-type and Incremental Trace Option-type is
+   used to transport the different metrics.  The exported metrics are
+   defined by the Bit-field IOAM Trace-Type as defined in Section 4.4.1
+   of [RFC9197].
 
-   To compute the delay, a timestamp reference from the encapsulating
-   node
+   To compute the delay at the transit and decapsulation node, a
+   timestamp reference from the encapsulation node needs to be added.
+   Bit 2 (timestamp seconds) and Bit 3 (timestamp fraction) from the
+   IOAM Trace-type field can be used for this purpose.  At each node,
+   the on-path delay can be computed using the delay from the
+   encapsulation node and the current node.
 
-   The exported metrics can use [I-D.spiegel-ippm-ioam-rawexport] to
-   export the raw to the collector.
+   To export the on-path delay metrics,
+   [I-D.spiegel-ippm-ioam-rawexport] can be used to collect raw IOAM
+   data.
 
 2.2.  Using IOAM DEX Option
 
@@ -212,19 +219,18 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    *  D1: delay between the Encapsulation node R1 and the Transit node
       R2.
 
-   *  D2: delay between the Encapsulation node R1 and the Transit node
-      R3.
-
-   *  D3: delay between the Encapsulation node R1 and the Decapsulation
-      node R4.
-
-
 
 
 Huang Feng, et al.       Expires 13 August 2023                 [Page 4]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
+
+   *  D2: delay between the Encapsulation node R1 and the Transit node
+      R3.
+
+   *  D3: delay between the Encapsulation node R1 and the Decapsulation
+      node R4.
 
                                  IOAM Domain
                  .........................................
@@ -267,12 +273,6 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
                  Figure 3: On-Path delay Data-field Format
 
-4.  Security Considerations
-
-   The security considerations for the IOAM Trace-Type and IOAM DEX
-   Option-type are defined in [RFC9197] and in [RFC9326].  This document
-   adds no additional security considerations.
-
 
 
 
@@ -281,6 +281,12 @@ Huang Feng, et al.       Expires 13 August 2023                 [Page 5]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
+
+4.  Security Considerations
+
+   The security considerations for the IOAM Trace-Type and IOAM DEX
+   Option-type are defined in [RFC9197] and in [RFC9326].  This document
+   adds no additional security considerations.
 
 5.  IANA Considerations
 
@@ -323,12 +329,6 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 7.2.  Informative References
 
-   [I-D.ahuang-ippm-dex-timestamp-ext]
-              Huang Feng, A., Francois, P., Claise, B., and T. Graf,
-              "Timestamp extension IOAM DEX", Work in Progress,
-              Internet-Draft, draft-ahuang-ippm-dex-timestamp-ext-00,
-              February 2023, <https://datatracker.ietf.org/doc/html/
-              draft-ahuang-ippm-dex-timestamp-ext-00>.
 
 
 
@@ -337,6 +337,13 @@ Huang Feng, et al.       Expires 13 August 2023                 [Page 6]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
+
+   [I-D.ahuang-ippm-dex-timestamp-ext]
+              Huang Feng, A., Francois, P., Claise, B., and T. Graf,
+              "Timestamp extension IOAM DEX", Work in Progress,
+              Internet-Draft, draft-ahuang-ippm-dex-timestamp-ext-00,
+              February 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ahuang-ippm-dex-timestamp-ext-00>.
 
    [I-D.ietf-opsawg-ipfix-on-path-telemetry]
               Graf, T., Claise, B., and A. H. Feng, "Export of On-Path
@@ -379,6 +386,14 @@ Authors' Addresses
    Email: benoit.claise@huawei.com
 
 
+
+
+
+Huang Feng, et al.       Expires 13 August 2023                 [Page 7]
+
+Internet-Draft           On-Path delay for IOAM            February 2023
+
+
    Thomas Graf
    Swisscom
    Binzring 17
@@ -389,4 +404,45 @@ Authors' Addresses
 
 
 
-Huang Feng, et al.       Expires 13 August 2023                 [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Huang Feng, et al.       Expires 13 August 2023                 [Page 8]
