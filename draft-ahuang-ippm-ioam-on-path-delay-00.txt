@@ -184,8 +184,8 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    To compute the delay at the transit and decapsulation node, a
    timestamp reference from the encapsulation node needs to be added.
    Bit 2 (timestamp seconds) and Bit 3 (timestamp fraction) from the
-   IOAM Trace-type field can be used for this purpose and at each node,
-   the on-path delay can be computed using the delay from the
+   IOAM Trace-type field [RFC9197] can be used for this purpose and at
+   each node, the on-path delay can be computed using the delay from the
    encapsulation node and the current node.
 
    To export the on-path delay, a new bit in the IOAM Trace-Type Bit-

@@ -200,9 +200,9 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 
         <t>To compute the delay at the transit and decapsulation node, a timestamp reference
         from the encapsulation node needs to be added. Bit 2 (timestamp seconds) and Bit 3
-        (timestamp fraction) from the IOAM Trace-type field can be used for this purpose and
-        at each node, the on-path delay can be computed using the delay from the encapsulation
-        node and the current node.</t>
+        (timestamp fraction) from the IOAM Trace-type field <xref target="RFC9197"/> can
+        be used for this purpose and at each node, the on-path delay can be computed using
+        the delay from the encapsulation node and the current node.</t>
 
         <t>To export the on-path delay, a new bit in the IOAM Trace-Type Bit-field is needed.
         <xref target="on_path_delay_datafield"/> defines the Data-Field.</t>
