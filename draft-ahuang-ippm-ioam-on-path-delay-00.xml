@@ -97,9 +97,10 @@
     <date day="15" month="February" year="2023"/>
 
     <abstract>
-      <t>This document defines a Data-Field to allow the export
-      of on-path delay information using In Situ Operations, Administration, and
-      Maintenance (IOAM).</t>
+      <t>This document defines a Data-Field In Situ Operations, Administration,
+      and Maintenance (IOAM) architecture for on-path delay information. This
+      Data-Field is registered as a new entry in the "IOAM Trace-Type" registry.
+      </t>
     </abstract>
 
     <note title="Requirements Language">
@@ -122,7 +123,7 @@
       IOAM data fields <xref target="RFC9197"/>.
       </t> -->
 
-      <t>This draft proposes an IOAM Trace-type Data-field and its associated
+      <t>This document proposes an IOAM Trace-type Data-field and its associated
       Bit-field to export delay measurements. The delay measurements can be
       obtained based on the "timestamp seconds" and "timestamp fractions" 
       Trace-type Data-fields defined in <xref target="RFC9197"/> using a
@@ -135,14 +136,17 @@
       Trace-type Data-Field. In Postcard-mode,
       <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> can be used to
       add a timestamp into the header.
-      </t>            -->
+      </t>-->
       <!--On-Path delay can be computed using IOAM
       <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.-->
 
-      <t>This document introduces a data field in the IOAM architecture to
+      <!-- <t>This document introduces a data field in the IOAM architecture to
       export delay information. It uses a bit in the IOAM Trace-type field
       to request exporting nodes to include delay measurement in the exported data.
-      </t>
+      </t> -->
+
+      <t><xref target="solution_overview"/> describes the suggested solution and
+      <xref target="on_path_delay_datafield"/> describes the proposed IOAM Data-Field.</t>
     </section>
 
     <section anchor="terminology" title="Terminology">
@@ -257,7 +261,8 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 
         <t>To export the aggregated on-path delay metrics, IPFIX can used with
         <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>. This allows aggregation before
-        the export.</t>
+        the export. Raw IOAM DEX Option data can also be exported using
+        <xref target="I-D.spiegel-ippm-ioam-rawexport"/>.</t>
 
       </section>
     </section>
