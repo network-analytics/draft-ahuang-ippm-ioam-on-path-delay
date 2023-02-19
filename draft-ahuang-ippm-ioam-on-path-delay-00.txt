@@ -5,22 +5,22 @@
 Network Working Group                                      A. Huang Feng
 Internet-Draft                                               P. Francois
 Intended status: Standards Track                               INSA-Lyon
-Expires: 19 August 2023                                        B. Claise
+Expires: 23 August 2023                                        B. Claise
                                                                   Huawei
                                                                  T. Graf
                                                                 Swisscom
-                                                        15 February 2023
+                                                        19 February 2023
 
 
-  On-Path delay Data-field for In Situ Operations, Administration, and
+  On-Path delay Data Field for In Situ Operations, Administration, and
                            Maintenance (IOAM)
                    draft-ahuang-ioam-on-path-delay-00
 
 Abstract
 
-   This document defines a Data-Field In Situ Operations,
+   This document defines a Data Field In Situ Operations,
    Administration, and Maintenance (IOAM) architecture for on-path delay
-   information.  This Data-Field is registered as a new entry in the
+   information.  This data field is registered as a new entry in the
    "IOAM Trace-Type" registry.
 
 Requirements Language
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 August 2023.
+   This Internet-Draft will expire on 23 August 2023.
 
 
 
 
 
 
-Huang Feng, et al.       Expires 19 August 2023                 [Page 1]
+Huang Feng, et al.       Expires 23 August 2023                 [Page 1]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -90,26 +90,26 @@ Table of Contents
 
 1.  Introduction
 
-   Network operators need to mesure the On-Path delay accross their
-   network to monitor the proper functionning of their infrastructure
-   and applications.
+   Network operators want to measure the On-Path delay of the customers
+   packets across their networks to determine where how much delay has
+   been accumulated for a given application to optimize and maintain
+   their networks.
 
-   This document proposes an IOAM Trace-type Data-field and its
-   associated Bit-field to export delay measurements.  The delay
-   measurements can be obtained based on the "timestamp seconds" and
-   "timestamp fractions" Trace-type Data-fields defined in [RFC9197]
-   using a Passport-mode approach.  In Postcard-mode, the delay can be
-   obtained using the timestamp extensions defined in
+   This document proposes an IOAM Trace-Type data field and its
+   associated bit field to export delay measurements.  The delay
+   measurements is obtained in passport-based IOAM based on the
+   "timestamp seconds" and "timestamp fractions" Trace-Type data fields
+   defined in [RFC9197].  In postcard-based IOAM the delay is obtained
+   using the timestamp extensions defined in
    [I-D.ahuang-ippm-dex-timestamp-ext].
 
    Section 3 describes the suggested solution and Section 4 describes
-   the proposed IOAM Data-Field.
+   the proposed IOAM data field.
 
 
 
 
-
-Huang Feng, et al.       Expires 19 August 2023                 [Page 2]
+Huang Feng, et al.       Expires 23 August 2023                 [Page 2]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -129,18 +129,18 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 3.  Solution overview
 
-   The on-path delay is computed between the encapsulation node of the
-   IOAM-domain and the transit or decapsulation node as shown in
+   The On-path delay is computed between the encapsulation node and the
+   transit or decapsulation node of the IOAM-domain as shown in
    Figure 1.  The calculated delays in Figure 1 are computed as
    following:
 
-   *  D1: delay between the Encapsulation node R1 and the Transit node
+   *  D1: delay between the encapsulation node R1 and the transit node
       R2.
 
-   *  D2: delay between the Encapsulation node R1 and the Transit node
+   *  D2: delay between the encapsulation node R1 and the transit node
       R3.
 
-   *  D3: delay between the Encapsulation node R1 and the Decapsulation
+   *  D3: delay between the encapsulation node R1 and the decapsulation
       node R4.
 
                                  IOAM Domain
@@ -165,7 +165,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-Huang Feng, et al.       Expires 19 August 2023                 [Page 3]
+Huang Feng, et al.       Expires 23 August 2023                 [Page 3]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -173,78 +173,78 @@ Internet-Draft           On-Path delay for IOAM            February 2023
        Figure 1: On-path delay use case.  Packets flow from host 1 to
                                   host 2.
 
-   In IOAM, this delay can be exported in Passport-mode using Pre-
-   allocated Trace-Option and Incremental Trace-Option as defined in
-   [RFC9197] or in Postcard-mode using IOAM DEX Option as defined in
-   [RFC9326].
+   In passport-based IOAM this delay is exported using Pre-allocated
+   Trace-Option and Incremental Trace-Option as defined in [RFC9197] or
+   in postcard-based IOAM using IOAM DEX Option as defined in [RFC9326].
 
-   Section 3.1 describes how the delay can be computed using the
-   existing Trace-Type Data-Fields and Section 3.2 describes how the
-   delay can be calculated using a timestamp extension.
+   Section 3.1 describes how the delay is computed using the existing
+   Trace-Type data fields and Section 3.2 describes how the delay can be
+   calculated using a timestamp extension.
 
 3.1.  Using IOAM Trace-Option
 
-   In Passport-mode, telemetry data is added to the data-plane packet at
-   each node of the IOAM-domain and all collected metrics are exported
-   by the decapsulation node.
+   In passport-based IOAM, telemetry data is added to the data-plane
+   packet at each node of the IOAM-domain and all collected metrics are
+   exported by the decapsulation node.
 
    Pre-allocated Trace Option-type and Incremental Trace Option-type, as
    defined in Section 4.4 of [RFC9197], is used to transport the
-   different metrics.  The exported metrics are defined by the Bit-field
-   IOAM Trace-Type as defined in Section 4.4.1 of [RFC9197].
+   different metrics.  The exported metrics are defined by the bit field
+   in IOAM Trace-Type as defined in Section 4.4.1 of [RFC9197].
 
    To compute the delay at the transit and decapsulation node, a
-   timestamp reference from the encapsulation node needs to be added.
-   Bit 2 (timestamp seconds) and Bit 3 (timestamp fraction) from the
-   IOAM Trace-type field [RFC9197] can be used for this purpose and at
-   each node, the on-path delay can be computed using the delay from the
-   encapsulation node and the current node.
+   timestamp reference from the encapsulation node needs is added.  Bit
+   2 (timestamp seconds) and bit 3 (timestamp fraction) from the IOAM
+   Trace-type field [RFC9197] is used for this purpose and at each node,
+   the On-path delay is computed using the delay from the encapsulation
+   and the current node.
 
-   To export the on-path delay, a new bit in the IOAM Trace-Type Bit-
-   field is needed.  Section 4 defines the Data-Field.
+   To export the On-path delay, a new bit in the IOAM Trace-Type bit
+   field is required.  Section 4 defines the data field.
 
-   To export the on-path delay metrics,
-   [I-D.spiegel-ippm-ioam-rawexport] can be used to collect raw IOAM
-   data.
+   To export the On-path delay metrics,
+   [I-D.spiegel-ippm-ioam-rawexport] is used to collect raw IOAM data.
 
 3.2.  Using IOAM DEX Option
 
-   In Postcard-mode, telemetry data is exported at the transit nodes and
-   decapsulation node of the IOAM domain.  The telemetry data can be
-   aggregated at each node before being exported to a collector.
+   In postcard-based IOAM, telemetry data is exported at the transit
+   nodes and decapsulation node of the IOAM domain.  The telemetry data
+   is aggregated at each node before being exported to a collector.
 
    DEX Option-type, as defined in [RFC9326], is used for this purpose.
-   The exported telemetry data is defined in IOAM Trace-Type Bit-field.
-   The export of the on-path delay is based on the On-Path Delay field
+   The exported telemetry data is defined in IOAM Trace-Type bit field.
+   The export of the On-path delay is based on the On-Path Delay field
    defined in Section 4.
 
 
 
 
-Huang Feng, et al.       Expires 19 August 2023                 [Page 4]
+
+
+Huang Feng, et al.       Expires 23 August 2023                 [Page 4]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
 
    The timestamp reference needs to be added to the IOAM DEX Option-type
    header.  [I-D.ahuang-ippm-dex-timestamp-ext] defines an extension to
-   allow adding the timestamp in the encapsulation node.  Bit 2
-   (timestamp seconds) and Bit 3 (timestamp fraction) from the IOAM DEX
+   allow the timestamp being added in the encapsulation node.  Bit 2
+   (timestamp seconds) and bit 3 (timestamp fraction) from the IOAM DEX
    Extension-Flags, defined in [I-D.ahuang-ippm-dex-timestamp-ext], are
    used to add this time reference.  At each transit and decapsulation
    node, the difference between the timestamp in the header and the
    current timestamp is computed.
 
-   To export the aggregated on-path delay metrics, IPFIX can used with
-   [I-D.ietf-opsawg-ipfix-on-path-telemetry].  This allows aggregation
-   before the export.  Raw IOAM DEX Option data can also be exported
-   using [I-D.spiegel-ippm-ioam-rawexport].
+   To export the aggregated On-path delay metrics, IPFIX can be used
+   with [I-D.ietf-opsawg-ipfix-on-path-telemetry].  This allows data
+   aggregation before the export.  Raw IOAM DEX Option data can also be
+   exported using [I-D.spiegel-ippm-ioam-rawexport].
 
 4.  On-Path delay Data-field
 
-   The "On-Path Delay" field is a 4-octet unsigned integer field.  This
-   field indicates the on-path delay between the encapsulation node and
-   the transit or decapsulation node mesured in microseconds.
+   The "On-Path Delay" field type is a 4-octet unsigned integer.  This
+   field indicates the On-path delay between the encapsulation node and
+   the transit or decapsulation node measured in microseconds.
 
      TBD
      0                   1                   2                   3
@@ -277,7 +277,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-Huang Feng, et al.       Expires 19 August 2023                 [Page 5]
+Huang Feng, et al.       Expires 23 August 2023                 [Page 5]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -301,11 +301,11 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/rfc/rfc2119>.
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
    [RFC9197]  Brockners, F., Ed., Bhandari, S., Ed., and T. Mizrahi,
               Ed., "Data Fields for In Situ Operations, Administration,
@@ -323,9 +323,9 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    [I-D.ietf-opsawg-ipfix-on-path-telemetry]
               Graf, T., Claise, B., and A. H. Feng, "Export of On-Path
               Delay in IPFIX", Work in Progress, Internet-Draft, draft-
-              ietf-opsawg-ipfix-on-path-telemetry-00, 19 January 2023,
-              <https://www.ietf.org/archive/id/draft-ietf-opsawg-ipfix-
-              on-path-telemetry-00.txt>.
+              ietf-opsawg-ipfix-on-path-telemetry-01, 16 February 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
+              ipfix-on-path-telemetry-01>.
 
    [I-D.spiegel-ippm-ioam-rawexport]
               Spiegel, M., Brockners, F., Bhandari, S., and R.
@@ -333,7 +333,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-Huang Feng, et al.       Expires 19 August 2023                 [Page 6]
+Huang Feng, et al.       Expires 23 August 2023                 [Page 6]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -389,4 +389,4 @@ Authors' Addresses
 
 
 
-Huang Feng, et al.       Expires 19 August 2023                 [Page 7]
+Huang Feng, et al.       Expires 23 August 2023                 [Page 7]

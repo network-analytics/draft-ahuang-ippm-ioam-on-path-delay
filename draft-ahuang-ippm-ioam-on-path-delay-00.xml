@@ -13,7 +13,7 @@
 <rfc category="std" docName="draft-ahuang-ioam-on-path-delay-00"
      ipr="trust200902">
   <front>
-    <title abbrev="On-Path delay for IOAM">On-Path delay Data-field for In
+    <title abbrev="On-Path delay for IOAM">On-Path delay Data Field for In
     Situ Operations, Administration, and Maintenance (IOAM)</title>
 
     <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">
@@ -94,13 +94,13 @@
       </address>
     </author>
 
-    <date day="15" month="February" year="2023"/>
+    <date day="19" month="February" year="2023"/>
 
     <abstract>
-      <t>This document defines a Data-Field In Situ Operations, Administration,
-      and Maintenance (IOAM) architecture for on-path delay information. This
-      Data-Field is registered as a new entry in the "IOAM Trace-Type" registry.
-      </t>
+      <t>This document defines a Data Field In Situ Operations,
+      Administration, and Maintenance (IOAM) architecture for on-path delay
+      information. This data field is registered as a new entry in the "IOAM
+      Trace-Type" registry.</t>
     </abstract>
 
     <note title="Requirements Language">
@@ -114,74 +114,55 @@
 
   <middle>
     <section anchor="introduction" title="Introduction">
-      <t>Network operators need to mesure the On-Path delay accross their
-      network to monitor the proper functionning of their infrastructure and
-      applications.</t> 
-         
-      <!-- <t>This draft proposes to export delay measurement results 
-      based on the "timestamp seconds" and "timestamp fractions" fields of the
-      IOAM data fields <xref target="RFC9197"/>.
-      </t> -->
+      <t>Network operators want to measure the On-Path delay of the customers
+      packets across their networks to determine where how much delay has been
+      accumulated for a given application to optimize and maintain their
+      networks.</t>
 
-      <t>This document proposes an IOAM Trace-type Data-field and its associated
-      Bit-field to export delay measurements. The delay measurements can be
-      obtained based on the "timestamp seconds" and "timestamp fractions" 
-      Trace-type Data-fields defined in <xref target="RFC9197"/> using a
-      Passport-mode approach. In Postcard-mode, the delay can be obtained
-      using the timestamp extensions defined in
-      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/>.
-      </t>
+      <t>This document proposes an IOAM Trace-Type data field and its
+      associated bit field to export delay measurements. The delay
+      measurements is obtained in passport-based IOAM based on the "timestamp
+      seconds" and "timestamp fractions" Trace-Type data fields defined in
+      <xref target="RFC9197"/>. In postcard-based IOAM the delay is obtained
+      using the timestamp extensions defined in <xref
+      target="I-D.ahuang-ippm-dex-timestamp-ext"/>.</t>
 
-      <!-- <t>In Passport-mode, the reference timestamp is obtained from IOAM
-      Trace-type Data-Field. In Postcard-mode,
-      <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> can be used to
-      add a timestamp into the header.
-      </t>-->
-      <!--On-Path delay can be computed using IOAM
-      <xref target="RFC9197"/> with both Passport-mode and Postcard-mode.-->
-
-      <!-- <t>This document introduces a data field in the IOAM architecture to
-      export delay information. It uses a bit in the IOAM Trace-type field
-      to request exporting nodes to include delay measurement in the exported data.
-      </t> -->
-
-      <t><xref target="solution_overview"/> describes the suggested solution and
-      <xref target="on_path_delay_datafield"/> describes the proposed IOAM Data-Field.</t>
+      <t><xref target="solution_overview"/> describes the suggested solution
+      and <xref target="on_path_delay_datafield"/> describes the proposed IOAM
+      data field.</t>
     </section>
 
     <section anchor="terminology" title="Terminology">
-      <!-- <t>This document makes use of the terms defined in <xref target="RFC9197"/>.</t> -->
+      <t>This document makes use of the following terms as defined in <xref
+      target="RFC9197"/>.</t>
 
-      <t>This document makes use of the following terms as defined in
-      <xref target="RFC9197"/>.</t>
-
-      <t>
-        <list style="symbols">
+      <t><list style="symbols">
           <t>IOAM-domain</t>
+
           <t>IOAM encapsulation node</t>
+
           <t>IOAM transit node</t>
+
           <t>IOAM decapsulation node</t>
-        </list>
-      </t>
+        </list></t>
     </section>
 
     <section anchor="solution_overview" title="Solution overview">
-      <t>
-      <!-- The On-path delay has been defined in 
-      <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/> TODO: using
-      performance metrics <xref target="RFC8911"/>. -->
-      The on-path delay is computed between the encapsulation node of the
-      IOAM-domain and the transit or decapsulation node as shown in
-      <xref target="topology"/>. The calculated delays in
-      <xref target="topology"/> are computed as following:</t>
+      <t>The On-path delay is computed between the encapsulation node and the
+      transit or decapsulation node of the IOAM-domain as shown in <xref
+      target="topology"/>. The calculated delays in <xref target="topology"/>
+      are computed as following:</t>
+
       <t><list style="symbols">
-          <t>D1: delay between the Encapsulation node R1 and the Transit
-          node R2.</t>
-          <t>D2: delay between the Encapsulation node R1 and the Transit
-          node R3.</t>
-          <t>D3: delay between the Encapsulation node R1 and the Decapsulation
+          <t>D1: delay between the encapsulation node R1 and the transit node
+          R2.</t>
+
+          <t>D2: delay between the encapsulation node R1 and the transit node
+          R3.</t>
+
+          <t>D3: delay between the encapsulation node R1 and the decapsulation
           node R4.</t>
-      </list></t>
+        </list></t>
 
       <figure anchor="topology"
               title="On-path delay use case. Packets flow from host 1 to host 2.">
@@ -208,73 +189,78 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 ]]></artwork>
       </figure>
 
-      <t>In IOAM, this delay can be exported in Passport-mode using 
-      Pre-allocated Trace-Option and Incremental Trace-Option as defined in
-      <xref target="RFC9197"/> or in Postcard-mode using IOAM DEX Option as defined
-      in <xref target="RFC9326"/>.
-      </t>
+      <t>In passport-based IOAM this delay is exported using Pre-allocated
+      Trace-Option and Incremental Trace-Option as defined in <xref
+      target="RFC9197"/> or in postcard-based IOAM using IOAM DEX Option as
+      defined in <xref target="RFC9326"/>.</t>
 
-      <t><xref target="trace-option"/> describes how the delay can be computed 
-      using the existing Trace-Type Data-Fields and <xref target="dex-option"/>
-      describes how the delay can be calculated using a timestamp extension.</t>
+      <t><xref target="trace-option"/> describes how the delay is computed
+      using the existing Trace-Type data fields and <xref
+      target="dex-option"/> describes how the delay can be calculated using a
+      timestamp extension.</t>
 
       <section anchor="trace-option" title="Using IOAM Trace-Option">
-        <t>In Passport-mode, telemetry data is added to the data-plane packet at each
-        node of the IOAM-domain and all collected metrics are exported by the decapsulation
-        node.</t>
+        <t>In passport-based IOAM, telemetry data is added to the data-plane
+        packet at each node of the IOAM-domain and all collected metrics are
+        exported by the decapsulation node.</t>
 
-        <t>Pre-allocated Trace Option-type and Incremental Trace Option-type, as defined 
-        in Section 4.4 of <xref target="RFC9197"/>, is used to transport the different
-        metrics. The exported metrics are defined by the Bit-field IOAM Trace-Type as
-        defined in Section 4.4.1 of <xref target="RFC9197"/>.</t>
+        <t>Pre-allocated Trace Option-type and Incremental Trace Option-type,
+        as defined in Section 4.4 of <xref target="RFC9197"/>, is used to
+        transport the different metrics. The exported metrics are defined by
+        the bit field in IOAM Trace-Type as defined in Section 4.4.1 of <xref
+        target="RFC9197"/>.</t>
 
-        <t>To compute the delay at the transit and decapsulation node, a timestamp reference
-        from the encapsulation node needs to be added. Bit 2 (timestamp seconds) and Bit 3
-        (timestamp fraction) from the IOAM Trace-type field <xref target="RFC9197"/> can
-        be used for this purpose and at each node, the on-path delay can be computed using
-        the delay from the encapsulation node and the current node.</t>
+        <t>To compute the delay at the transit and decapsulation node, a
+        timestamp reference from the encapsulation node needs is added. Bit 2
+        (timestamp seconds) and bit 3 (timestamp fraction) from the IOAM
+        Trace-type field <xref target="RFC9197"/> is used for this purpose and
+        at each node, the On-path delay is computed using the delay from the
+        encapsulation and the current node.</t>
 
-        <t>To export the on-path delay, a new bit in the IOAM Trace-Type Bit-field is needed.
-        <xref target="on_path_delay_datafield"/> defines the Data-Field.</t>
+        <t>To export the On-path delay, a new bit in the IOAM Trace-Type bit
+        field is required. <xref target="on_path_delay_datafield"/> defines
+        the data field.</t>
 
-        <t>To export the on-path delay metrics, <xref target="I-D.spiegel-ippm-ioam-rawexport"/>
-        can be used to collect raw IOAM data.</t>
-
+        <t>To export the On-path delay metrics, <xref
+        target="I-D.spiegel-ippm-ioam-rawexport"/> is used to collect raw IOAM
+        data.</t>
       </section>
 
       <section anchor="dex-option" title="Using IOAM DEX Option">
-        <t>In Postcard-mode, telemetry data is exported at the transit nodes and decapsulation
-        node of the IOAM domain. The telemetry data can be aggregated at each node before being
-        exported to a collector.</t>
+        <t>In postcard-based IOAM, telemetry data is exported at the transit
+        nodes and decapsulation node of the IOAM domain. The telemetry data is
+        aggregated at each node before being exported to a collector.</t>
 
-        <t>DEX Option-type, as defined in <xref target="RFC9326"/>, is used for this purpose.
-        The exported telemetry data is defined in IOAM Trace-Type Bit-field. The export of the
-        on-path delay is based on the On-Path Delay field defined in 
-        <xref target="on_path_delay_datafield"/>.</t>
+        <t>DEX Option-type, as defined in <xref target="RFC9326"/>, is used
+        for this purpose. The exported telemetry data is defined in IOAM
+        Trace-Type bit field. The export of the On-path delay is based on the
+        On-Path Delay field defined in <xref
+        target="on_path_delay_datafield"/>.</t>
 
-        <t>The timestamp reference needs to be added to the IOAM DEX Option-type header.
-        <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/> defines an extension to allow adding
-        the timestamp in the encapsulation node. Bit 2 (timestamp seconds) and Bit 3 (timestamp
-        fraction) from the IOAM DEX Extension-Flags, defined in
-        <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/>, are used to add this time reference.
-        At each transit and decapsulation node, the difference between the timestamp in the
-        header and the current timestamp is computed.</t>
+        <t>The timestamp reference needs to be added to the IOAM DEX
+        Option-type header. <xref target="I-D.ahuang-ippm-dex-timestamp-ext"/>
+        defines an extension to allow the timestamp being added in the
+        encapsulation node. Bit 2 (timestamp seconds) and bit 3 (timestamp
+        fraction) from the IOAM DEX Extension-Flags, defined in <xref
+        target="I-D.ahuang-ippm-dex-timestamp-ext"/>, are used to add this
+        time reference. At each transit and decapsulation node, the difference
+        between the timestamp in the header and the current timestamp is
+        computed.</t>
 
-        <t>To export the aggregated on-path delay metrics, IPFIX can used with
-        <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>. This allows aggregation before
-        the export. Raw IOAM DEX Option data can also be exported using
-        <xref target="I-D.spiegel-ippm-ioam-rawexport"/>.</t>
-
+        <t>To export the aggregated On-path delay metrics, IPFIX can be used
+        with <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>. This
+        allows data aggregation before the export. Raw IOAM DEX Option data
+        can also be exported using <xref
+        target="I-D.spiegel-ippm-ioam-rawexport"/>.</t>
       </section>
     </section>
 
     <section anchor="on_path_delay_datafield" title="On-Path delay Data-field">
-      <t>The "On-Path Delay" field is a 4-octet unsigned integer field. This field
-      indicates the on-path delay between the encapsulation node and the transit or
-      decapsulation node mesured in microseconds.</t>
+      <t>The "On-Path Delay" field type is a 4-octet unsigned integer. This
+      field indicates the On-path delay between the encapsulation node and the
+      transit or decapsulation node measured in microseconds.</t>
 
-      <figure anchor="fig_datafield"
-              title="On-Path delay Data-field Format">
+      <figure anchor="fig_datafield" title="On-Path delay Data-field Format">
         <artwork align="center"><![CDATA[TBD
 0                   1                   2                   3
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -284,37 +270,29 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 ]]></artwork>
       </figure>
 
-      <t>The Data-Field is allocated by IANA, as defined in 
-      <xref target="IANA_Considerations"/>.</t>
+      <t>The Data-Field is allocated by IANA, as defined in <xref
+      target="IANA_Considerations"/>.</t>
     </section>
 
-    <!-- <section anchor="usecases" title="Use Cases">
-      <t>Possible interesting On-Path delay measurement use cases in
-      combination with other key metrics is described in Section 5 of <xref
-      target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>.</t>
-    </section> -->
-
     <section anchor="security" title="Security Considerations">
-      <t>The security considerations for the IOAM Trace-Type and IOAM DEX Option-type
-      are defined in <xref target="RFC9197"/> and in <xref target="RFC9326"/>. This
-      document adds no additional security considerations.</t>
+      <t>The security considerations for the IOAM Trace-Type and IOAM DEX
+      Option-type are defined in <xref target="RFC9197"/> and in <xref
+      target="RFC9326"/>. This document adds no additional security
+      considerations.</t>
     </section>
 
     <section anchor="IANA_Considerations" title="IANA Considerations">
-      <t>This document requests IANA to add the following bit in the
-      "IOAM Trace-Type" Registry.</t>
+      <t>This document requests IANA to add the following bit in the "IOAM
+      Trace-Type" Registry.</t>
 
-      <t>
-        <figure>
+      <t><figure>
           <artwork align="left"><![CDATA[
   Bit: [TBD]
   Description: On-path delay between the encapsulated node and the
                transit or decapsulation node measured in microseconds.
-  Reference: [This-RFC-to-be]]]>
-          </artwork>
-        </figure>
-      </t>
-
+  Reference: [This-RFC-to-be]
+          ]]></artwork>
+        </figure></t>
     </section>
 
     <section anchor="acknowledgements" title="Acknowledgements">
@@ -333,13 +311,12 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.9326.xml"?>
 
-      <!-- <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ahuang-ippm-dex-timestamp-ext.xml"?> -->
-
       <reference anchor="I-D.ahuang-ippm-dex-timestamp-ext" target="">
         <front>
           <title>Timestamp extension IOAM DEX</title>
 
-          <author fullname="Alex Huang Feng" initials="A." surname="Huang Feng">
+          <author fullname="Alex Huang Feng" initials="A."
+                  surname="Huang Feng">
             <organization>INSA-Lyon</organization>
           </author>
 
@@ -364,11 +341,9 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
     </references>
 
     <references title="Informative References">
-      <!-- <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8911.xml"?> -->
-
       <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.spiegel-ippm-ioam-rawexport.xml"?>
-      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-opsawg-ipfix-on-path-telemetry.xml"?>
 
+      <?rfc include="https://bib.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-opsawg-ipfix-on-path-telemetry.xml"?>
     </references>
   </back>
 </rfc>
