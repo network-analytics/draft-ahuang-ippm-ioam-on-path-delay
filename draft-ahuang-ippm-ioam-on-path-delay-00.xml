@@ -94,7 +94,7 @@
       </address>
     </author>
 
-    <date day="19" month="February" year="2023"/>
+    <date day="23" month="February" year="2023"/>
 
     <abstract>
       <t>This document defines a Data Field In Situ Operations,
@@ -191,8 +191,8 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
 
       <t>In passport-based IOAM this delay is exported using Pre-allocated
       Trace-Option and Incremental Trace-Option as defined in <xref
-      target="RFC9197"/> or in postcard-based IOAM using IOAM DEX Option as
-      defined in <xref target="RFC9326"/>.</t>
+      target="RFC9197"/> and in postcard-based IOAM, the delay is computed 
+      using IOAM DEX Option as defined in <xref target="RFC9326"/>.</t>
 
       <t><xref target="trace-option"/> describes how the delay is computed
       using the existing Trace-Type data fields and <xref
@@ -211,7 +211,7 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
         target="RFC9197"/>.</t>
 
         <t>To compute the delay at the transit and decapsulation node, a
-        timestamp reference from the encapsulation node needs is added. Bit 2
+        timestamp reference from the encapsulation node is added. Bit 2
         (timestamp seconds) and bit 3 (timestamp fraction) from the IOAM
         Trace-type field <xref target="RFC9197"/> is used for this purpose and
         at each node, the On-path delay is computed using the delay from the
@@ -221,9 +221,12 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
         field is required. <xref target="on_path_delay_datafield"/> defines
         the data field.</t>
 
-        <t>To export the On-path delay metrics, <xref
+        <t><xref target="export"/> describes how the On-path delay metrics can
+        be exported.</t>
+
+        <!-- <t>To export the On-path delay metrics, <xref
         target="I-D.spiegel-ippm-ioam-rawexport"/> is used to collect raw IOAM
-        data.</t>
+        data.</t> -->
       </section>
 
       <section anchor="dex-option" title="Using IOAM DEX Option">
@@ -247,11 +250,23 @@ Host 1  Encapsulation   Transit      Transit   Decapsulation  Host 2
         between the timestamp in the header and the current timestamp is
         computed.</t>
 
-        <t>To export the aggregated On-path delay metrics, IPFIX can be used
+        <t><xref target="export"/> describes how the On-path delay metrics can
+        be exported.</t>
+
+        <!-- <t>To export the aggregated On-path delay metrics, IPFIX can be used
         with <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/>. This
         allows data aggregation before the export. Raw IOAM DEX Option data
         can also be exported using <xref
-        target="I-D.spiegel-ippm-ioam-rawexport"/>.</t>
+        target="I-D.spiegel-ippm-ioam-rawexport"/>.</t> -->
+      </section>
+
+      <section anchor="export" title="Export of On-path delay">
+        <t>The export of the On-path delay is out of scope of this document.
+        <xref target="I-D.spiegel-ippm-ioam-rawexport"/> proposes a way to export 
+        the raw IOAM header for both passport-mode and postcard-mode and
+        <xref target="I-D.ietf-opsawg-ipfix-on-path-telemetry"/> proposes
+        IPFIX Information Elements to allow aggregation before the export. 
+        </t>
       </section>
     </section>
 

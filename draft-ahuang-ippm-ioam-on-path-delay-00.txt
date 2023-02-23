@@ -5,11 +5,11 @@
 Network Working Group                                      A. Huang Feng
 Internet-Draft                                               P. Francois
 Intended status: Standards Track                               INSA-Lyon
-Expires: 23 August 2023                                        B. Claise
+Expires: 27 August 2023                                        B. Claise
                                                                   Huawei
                                                                  T. Graf
                                                                 Swisscom
-                                                        19 February 2023
+                                                        23 February 2023
 
 
   On-Path delay Data Field for In Situ Operations, Administration, and
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 August 2023.
+   This Internet-Draft will expire on 27 August 2023.
 
 
 
 
 
 
-Huang Feng, et al.       Expires 23 August 2023                 [Page 1]
+Huang Feng, et al.       Expires 27 August 2023                 [Page 1]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -79,6 +79,7 @@ Table of Contents
    3.  Solution overview . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Using IOAM Trace-Option . . . . . . . . . . . . . . . . .   4
      3.2.  Using IOAM DEX Option . . . . . . . . . . . . . . . . . .   4
+     3.3.  Export of On-path delay . . . . . . . . . . . . . . . . .   5
    4.  On-Path delay Data-field  . . . . . . . . . . . . . . . . . .   5
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
@@ -108,8 +109,7 @@ Table of Contents
 
 
 
-
-Huang Feng, et al.       Expires 23 August 2023                 [Page 2]
+Huang Feng, et al.       Expires 27 August 2023                 [Page 2]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -165,7 +165,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-Huang Feng, et al.       Expires 23 August 2023                 [Page 3]
+Huang Feng, et al.       Expires 27 August 2023                 [Page 3]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -174,8 +174,9 @@ Internet-Draft           On-Path delay for IOAM            February 2023
                                   host 2.
 
    In passport-based IOAM this delay is exported using Pre-allocated
-   Trace-Option and Incremental Trace-Option as defined in [RFC9197] or
-   in postcard-based IOAM using IOAM DEX Option as defined in [RFC9326].
+   Trace-Option and Incremental Trace-Option as defined in [RFC9197] and
+   in postcard-based IOAM, the delay is computed using IOAM DEX Option
+   as defined in [RFC9326].
 
    Section 3.1 describes how the delay is computed using the existing
    Trace-Type data fields and Section 3.2 describes how the delay can be
@@ -193,8 +194,8 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    in IOAM Trace-Type as defined in Section 4.4.1 of [RFC9197].
 
    To compute the delay at the transit and decapsulation node, a
-   timestamp reference from the encapsulation node needs is added.  Bit
-   2 (timestamp seconds) and bit 3 (timestamp fraction) from the IOAM
+   timestamp reference from the encapsulation node is added.  Bit 2
+   (timestamp seconds) and bit 3 (timestamp fraction) from the IOAM
    Trace-type field [RFC9197] is used for this purpose and at each node,
    the On-path delay is computed using the delay from the encapsulation
    and the current node.
@@ -202,8 +203,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    To export the On-path delay, a new bit in the IOAM Trace-Type bit
    field is required.  Section 4 defines the data field.
 
-   To export the On-path delay metrics,
-   [I-D.spiegel-ippm-ioam-rawexport] is used to collect raw IOAM data.
+   Section 3.3 describes how the On-path delay metrics can be exported.
 
 3.2.  Using IOAM DEX Option
 
@@ -221,7 +221,7 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 
 
-Huang Feng, et al.       Expires 23 August 2023                 [Page 4]
+Huang Feng, et al.       Expires 27 August 2023                 [Page 4]
 
 Internet-Draft           On-Path delay for IOAM            February 2023
 
@@ -235,10 +235,15 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    node, the difference between the timestamp in the header and the
    current timestamp is computed.
 
-   To export the aggregated On-path delay metrics, IPFIX can be used
-   with [I-D.ietf-opsawg-ipfix-on-path-telemetry].  This allows data
-   aggregation before the export.  Raw IOAM DEX Option data can also be
-   exported using [I-D.spiegel-ippm-ioam-rawexport].
+   Section 3.3 describes how the On-path delay metrics can be exported.
+
+3.3.  Export of On-path delay
+
+   The export of the On-path delay is out of scope of this document.
+   [I-D.spiegel-ippm-ioam-rawexport] proposes a way to export the raw
+   IOAM header for both passport-mode and postcard-mode and
+   [I-D.ietf-opsawg-ipfix-on-path-telemetry] proposes IPFIX Information
+   Elements to allow aggregation before the export.
 
 4.  On-Path delay Data-field
 
@@ -268,19 +273,19 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    This document requests IANA to add the following bit in the "IOAM
    Trace-Type" Registry.
 
+
+
+
+
+Huang Feng, et al.       Expires 27 August 2023                 [Page 5]
+
+Internet-Draft           On-Path delay for IOAM            February 2023
+
+
     Bit: [TBD]
     Description: On-path delay between the encapsulated node and the
                  transit or decapsulation node measured in microseconds.
     Reference: [This-RFC-to-be]
-
-
-
-
-
-Huang Feng, et al.       Expires 23 August 2023                 [Page 5]
-
-Internet-Draft           On-Path delay for IOAM            February 2023
-
 
 7.  Acknowledgements
 
@@ -301,11 +306,11 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
+              <https://www.rfc-editor.org/rfc/rfc2119>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
    [RFC9197]  Brockners, F., Ed., Bhandari, S., Ed., and T. Mizrahi,
               Ed., "Data Fields for In Situ Operations, Administration,
@@ -320,6 +325,19 @@ Internet-Draft           On-Path delay for IOAM            February 2023
 
 8.2.  Informative References
 
+
+
+
+
+
+
+
+
+Huang Feng, et al.       Expires 27 August 2023                 [Page 6]
+
+Internet-Draft           On-Path delay for IOAM            February 2023
+
+
    [I-D.ietf-opsawg-ipfix-on-path-telemetry]
               Graf, T., Claise, B., and A. H. Feng, "Export of On-Path
               Delay in IPFIX", Work in Progress, Internet-Draft, draft-
@@ -330,18 +348,10 @@ Internet-Draft           On-Path delay for IOAM            February 2023
    [I-D.spiegel-ippm-ioam-rawexport]
               Spiegel, M., Brockners, F., Bhandari, S., and R.
               Sivakolundu, "In-situ OAM raw data export with IPFIX",
-
-
-
-Huang Feng, et al.       Expires 23 August 2023                 [Page 6]
-
-Internet-Draft           On-Path delay for IOAM            February 2023
-
-
               Work in Progress, Internet-Draft, draft-spiegel-ippm-ioam-
               rawexport-06, 21 February 2022,
-              <https://www.ietf.org/archive/id/draft-spiegel-ippm-ioam-
-              rawexport-06.txt>.
+              <https://datatracker.ietf.org/doc/html/draft-spiegel-ippm-
+              ioam-rawexport-06>.
 
 Authors' Addresses
 
@@ -379,14 +389,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-Huang Feng, et al.       Expires 23 August 2023                 [Page 7]
+Huang Feng, et al.       Expires 27 August 2023                 [Page 7]
